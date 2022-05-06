@@ -32,7 +32,9 @@ public class RestCon {
     }
 
     @GetMapping("/j/{judy}")
-    public List<Voirs> VoirLists(@PathVariable("judy") String crygor) {
-        return v.VoirLists(crygor);
+    public List<Voirs> ListLocal(@PathVariable("judy") String crygor) {
+        List<Voirs> vo = v.VoirLists("음봉면");
+
+        return vo;
     }
 }
