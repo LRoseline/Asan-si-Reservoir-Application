@@ -1,11 +1,9 @@
 package com.tfriends.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-public class VoirAPI extends Voirs {
+@Data
+public class VoirAPI {
     private String Twlevel;
     private String Trate;
     private String Ywlevel;
