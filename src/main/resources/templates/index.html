@@ -40,11 +40,11 @@
                 console.log(r.data);
 
                 for (let index = 0; index < 18; index++) {
-                    var checkpoint = L.marker([r.data[index].lat, r.data[index].lon]);
+                    var checkpoint = L.marker([r.data[index].lat, r.data[index].lon]).addTo(map);
                     checkpoint.on("click", function() {
                         // alert(r.data[index].resername+"저수지");
                         
-                    }).bindPopup(r.data[index].resername+"저수지").openPopup().addTo(map);
+                    }).bindPopup(r.data[index].resername+"저수지"+loadReservoir(r.data[index].no)).openPopup();
                 }
             });
         }
@@ -53,6 +53,13 @@
         marker2.on("click",function () {
             alert(nobrand);
         }).addTo(map);
+
+        function loadReservoir(number) {
+            axios.get("/api/voir/"+number).then(r => {
+                "<h6>금일정보</h6><br>"+"저수율 : "+r.data.trate+"<br>저수지 수위 : "+r.data.twlevel+
+                "<h6>전일정보</h6><br>"+"저수율 : "+r.data.yrate+"<br>저수지 수위 : "+r.data.ywlevel
+            });
+        }
     </script>
     </th:block>
 </html>
