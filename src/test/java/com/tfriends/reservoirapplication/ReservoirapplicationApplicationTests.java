@@ -15,6 +15,7 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import com.tfriends.domain.VoirAPI;
 import com.tfriends.domain.Voirs;
 import com.tfriends.service.VoirService;
 
@@ -66,7 +67,9 @@ class ReservoirapplicationApplicationTests {
 
 	@Test
 	public void TestXMLReservoir () throws Exception {
-		Voirs vo = v.VoirClick(1);
+        VoirAPI api = new VoirAPI();
+
+        Voirs vo = v.VoirClick(1);
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMdd");
 		Calendar [] dates = {Calendar.getInstance(), Calendar.getInstance()};
 		dates[0].add(Calendar.DATE, -2);
@@ -109,12 +112,11 @@ class ReservoirapplicationApplicationTests {
                 element.getElementsByTagName("water_level")
             };
 
-			for (int j = 0; j < 2; j++) {
-				for (int i = 0; i < voir.length; i++) {
-					System.out.println(voir[i].item(j).getFirstChild().getNodeValue());
-				}
-				System.out.println("==================");
-			}
+            api.setTrate(voir[2].item(0).getFirstChild().getNodeValue());
+            api.setTwlevel(voir[3].item(0).getFirstChild().getNodeValue());
+            api.setYrate(voir[2].item(1).getFirstChild().getNodeValue());
+            api.setYwlevel(voir[3].item(1).getFirstChild().getNodeValue());
         }
+        System.out.println(api);
 	}
 }
