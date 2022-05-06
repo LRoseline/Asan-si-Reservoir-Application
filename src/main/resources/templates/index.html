@@ -2,5 +2,57 @@
     <th:block layout:fragment="title">
         <title>아산시 저수지 및 날씨정보 시스템</title>
     </th:block>
-    <th:block layout:fragment="main">Hello</th:block>
+    <th:block layout:fragment="css">
+        <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" crossorigin=""></script>
+        <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+        
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" crossorigin="" />
+    
+        <style>
+            #map {
+                width: 100%;
+                height: 500px;
+            }
+        </style>
+    </th:block>
+    <th:block layout:fragment="main">
+        <div id="map"></div>
+    <script>
+        const xy = [36.79, 127];
+        const nobrand = "노브랜드 버거 홍대점";
+
+        const map = new L.map('map').setView(xy, 11);
+
+        var layer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        });
+
+        map.addLayer(layer);
+
+        cmdr("all");
+
+        function cmdr (station) {
+            axios.get("/api/j/"+station).then(r => {
+                console.log(r.data);
+
+                for (let index = 0; index < 18; index++) {
+                    var checkpoint = L.marker([r.data[index].lat, r.data[index].lon]);
+                    checkpoint.on("click", function() {
+                        // alert(r.data[index].resername+"저수지");
+                        
+                    }).bindPopup(r.data[index].resername+"저수지").openPopup().addTo(map);
+                }
+            });
+        }
+
+        var marker2 = L.marker([37.5544898, 126.9221304]);
+        marker2.on("click",function () {
+            alert(nobrand);
+        }).addTo(map);
+    </script>
+    </th:block>
 </html>
