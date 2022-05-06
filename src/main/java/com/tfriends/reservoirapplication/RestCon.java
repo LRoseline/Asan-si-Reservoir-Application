@@ -35,7 +35,7 @@ import org.w3c.dom.NodeList;
 public class RestCon {
 
     public String Tricker(int Input_the_line_number) throws Exception {
-        String s = "C:/Users/amb17/Desktop/keys.txt";
+        String s = "/home/emilia/keys.txt";
         File f = new File(s);
 
 		FileReader reader = new FileReader(f);
