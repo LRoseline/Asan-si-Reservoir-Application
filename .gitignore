@@ -35,3 +35,4 @@ out/
 
 ### VS Code ###
 .vscode/
+gradle/wrapper/gradle-7.4.1-bin.zip
