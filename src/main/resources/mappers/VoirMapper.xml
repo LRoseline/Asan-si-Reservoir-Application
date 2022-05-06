@@ -11,7 +11,7 @@
         SELECT * FROM reservoir WHERE no = #{no}
     </select>
     <sql id="find">
-        <if test="jurisdiction != null">
+        <if test="jurisdiction != 'all'">
             WHERE jurisdiction = #{jurisdiction}
         </if>
     </sql>
