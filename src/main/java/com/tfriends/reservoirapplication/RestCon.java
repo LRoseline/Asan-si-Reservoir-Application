@@ -87,7 +87,7 @@ public class RestCon {
         Voirs vo = v.VoirClick(no);
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMdd");
 		Calendar [] dates = {Calendar.getInstance(), Calendar.getInstance()};
-		dates[0].add(Calendar.DATE, -2);
+		dates[0].add(Calendar.DATE, -1);
 
 		String [] datesdf = {sdf.format(dates[0].getTime()), sdf.format(dates[1].getTime())};
 
