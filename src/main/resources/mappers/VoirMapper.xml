@@ -4,9 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tfriends.mapper.VoirMapper">
     <select id="vlist" resultType="Voirs">
-        SELECT * FROM reservoir WHERE jurisdiction = #{jurisdiction}
+        SELECT * FROM reservoir
+        <include refid="find"></include>
     </select>
     <select id="vinfo" resultType="Voirs">
         SELECT * FROM reservoir WHERE no = #{no}
     </select>
+    <sql id="find">
+        <if test="jurisdiction != null">
+            WHERE jurisdiction = #{jurisdiction}
+        </if>
+    </sql>
 </mapper>

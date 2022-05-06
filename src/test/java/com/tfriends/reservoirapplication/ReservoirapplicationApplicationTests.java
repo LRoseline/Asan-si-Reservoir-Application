@@ -59,7 +59,7 @@ class ReservoirapplicationApplicationTests {
 
 	@Test
 	public void TestCodeRead () {
-		List<Voirs> vo = v.VoirLists("음봉면");
+		List<Voirs> vo = v.VoirLists("");
 
 		System.out.println(vo);
 	}

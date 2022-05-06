@@ -25,7 +25,7 @@ public class RestCon {
         WeatherService w = new WeatherService();
         return w.WeatherLoad(no);
     }
-
+    
     @GetMapping("/reservoir/{no}")
     public Voirs VoirDetail(@PathVariable("no") int no) {
         return v.VoirClick(no);
@@ -33,7 +33,7 @@ public class RestCon {
 
     @GetMapping("/j/{judy}")
     public List<Voirs> ListLocal(@PathVariable("judy") String crygor) {
-        List<Voirs> vo = v.VoirLists("음봉면");
+        List<Voirs> vo = v.VoirLists(crygor);
 
         return vo;
     }
