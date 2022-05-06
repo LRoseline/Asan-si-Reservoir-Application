@@ -1,0 +1,23 @@
+<html lang="ko" xmlns:th="https://www.thymeleaf.org" xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout">
+    <head th:fragment="header-closet">
+		<th:block layout:fragment="title"></th:block>
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="#F29100">
+
+		<!-- Bootstrap Area -->
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+		<!-- React Area -->
+		<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+		<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		<script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+
+		<!-- Custom CSS Area-->
+		<th:block layout:fragment="css"></th:block>
+    </head>
+</html>
