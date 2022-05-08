@@ -17,6 +17,6 @@
         FROM dominications AS a
         RIGHT JOIN dust_station AS b
             on a.duststation = b.name
-        WHERE a.no  = #{no}
+        WHERE a.no = #{no}
     </select>
 </mapper>

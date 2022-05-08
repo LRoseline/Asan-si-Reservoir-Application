@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.w3c.dom.Document;
@@ -63,10 +64,12 @@ public class RestCon {
 
     @Autowired
     private VoirService v;
+
+    @Autowired
+    private WeatherService w;
     
     @GetMapping("/weather/{no}")
     public WeatherVO WeatherInfo(@PathVariable("no") int no) {
-        WeatherService w = new WeatherService();
         return w.WeatherLoad(no);
     }
     
@@ -75,14 +78,14 @@ public class RestCon {
         return v.VoirClick(no);
     }
 
-    @GetMapping("/j/{judy}")
+    @PostMapping("/j/{judy}")
     public List<Voirs> ListLocal(@PathVariable("judy") String crygor) {
         List<Voirs> vo = v.VoirLists(crygor);
 
         return vo;
     }
 
-    @GetMapping("/voir/{no}")
+    @PostMapping("/voir/{no}")
     public VoirAPI VoirAPI(@PathVariable("no") int no) throws Exception {
         VoirAPI api = new VoirAPI();
 
@@ -128,17 +131,19 @@ public class RestCon {
                 element.getElementsByTagName("rate"),
                 element.getElementsByTagName("water_level")
             };
+            
+            SimpleDateFormat ydf = new SimpleDateFormat("YYYY.MM.dd");
 
-            api.setTdate(voir[1].item(0).getFirstChild().getNodeValue());
+            api.setTdate(ydf.format(voir[1].item(0).getFirstChild().getNodeValue()));
             api.setTrate(voir[2].item(0).getFirstChild().getNodeValue());
             api.setTwlevel(voir[3].item(0).getFirstChild().getNodeValue());
 
             try {
-                api.setYdate(voir[1].item(1).getFirstChild().getNodeValue());
+                api.setYdate(ydf.format(voir[1].item(1).getFirstChild().getNodeValue()));
                 api.setYrate(voir[2].item(1).getFirstChild().getNodeValue());
                 api.setYwlevel(voir[3].item(1).getFirstChild().getNodeValue());
             } catch (Exception e) {
-                api.setYdate(voir[1].item(0).getFirstChild().getNodeValue());
+                api.setYdate(ydf.format(voir[1].item(0).getFirstChild().getNodeValue()));
                 api.setYrate(voir[2].item(0).getFirstChild().getNodeValue());
                 api.setYwlevel(voir[3].item(0).getFirstChild().getNodeValue());
             }
