@@ -131,19 +131,17 @@ public class RestCon {
                 element.getElementsByTagName("rate"),
                 element.getElementsByTagName("water_level")
             };
-            
-            SimpleDateFormat ydf = new SimpleDateFormat("YYYY.MM.dd");
 
-            api.setTdate(ydf.format(voir[1].item(0).getFirstChild().getNodeValue()));
+            api.setTdate(voir[1].item(0).getFirstChild().getNodeValue());
             api.setTrate(voir[2].item(0).getFirstChild().getNodeValue());
             api.setTwlevel(voir[3].item(0).getFirstChild().getNodeValue());
 
             try {
-                api.setYdate(ydf.format(voir[1].item(1).getFirstChild().getNodeValue()));
+                api.setYdate(voir[1].item(1).getFirstChild().getNodeValue());
                 api.setYrate(voir[2].item(1).getFirstChild().getNodeValue());
                 api.setYwlevel(voir[3].item(1).getFirstChild().getNodeValue());
             } catch (Exception e) {
-                api.setYdate(ydf.format(voir[1].item(0).getFirstChild().getNodeValue()));
+                api.setYdate(voir[1].item(0).getFirstChild().getNodeValue());
                 api.setYrate(voir[2].item(0).getFirstChild().getNodeValue());
                 api.setYwlevel(voir[3].item(0).getFirstChild().getNodeValue());
             }
