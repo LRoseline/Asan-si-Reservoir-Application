@@ -16,7 +16,7 @@
         <div id="map"></div>
     <script>
         const xy = [36.79, 127];
-        const nobrand = "노브랜드 버거 홍대점";
+        const nobrand = "Hello, world!";
 
         const map = new L.map('map').setView(xy, 11);
 
@@ -26,7 +26,7 @@
 
         map.addLayer(layer);
 
-        var marker2 = L.marker([37.5544898, 126.9221304]);
+        var marker2 = L.marker([37.55504, 126.92064]);
         marker2.on("click",function () {
             alert(nobrand);
         }).addTo(map);
