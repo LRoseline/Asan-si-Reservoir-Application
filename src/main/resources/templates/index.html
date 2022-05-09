@@ -6,66 +6,207 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" crossorigin />
         <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" crossorigin></script>
         <style>
+            :root {
+                --brand-color-blue: #0b4499;
+                --brand-color-green: rgb(13,104,38);
+                --brand-color-orange: rgb(255,120,0);
+                --brand-color-gray: rgb(137,135,136);
+            }
+    
+            #mapping {
+                position: fixed;
+                top: 60px;
+                width: 100%;
+                height: 100%;
+                transition: 0.2s;
+            }
+    
             #map {
                 width: 100%;
                 height: 100%;
             }
+    
+            .asan-btn-menu, .asan-btn-menu:visited, .asan-btn-menu:focus {
+                width: 60px;
+                height: 60px;
+                margin-right: 0;
+                background-color: #00000000;
+                border-color: #00000000;
+                color: #FFFFFF;
+                font-weight: 800;
+                font-size: 24px;
+                transition: 0.2s;
+                outline-style: none;
+            }
+    
+            .asan-btn-menu:hover {
+                width: 60px;
+                height: 60px;
+                margin-right: 0;
+                background-color: #FFF;
+                color: var(--brand-color-blue);
+                font-weight: 800;
+                font-size: 24px;
+                outline-style: none;
+            }
+            
+            .asan-btn-menu-x, .asan-btn-menu-x:visited, .asan-btn-menu-x:focus {
+                width: 60px;
+                height: 60px;
+                position: absolute;
+                top: 0;
+                right: 0;
+                background-color: #00000000;
+                border-color: #00000000;
+                color: #FFFFFF;
+                font-weight: 800;
+                font-size: 24px;
+                transition: 0.2s;
+                outline-style: none;
+            }
+    
+            .asan-btn-menu-x:hover {
+                width: 60px;
+                height: 60px;
+                margin-right: 0;
+                background-color: #FFF;
+                color: var(--brand-color-blue);
+                font-weight: 800;
+                font-size: 24px;
+                outline-style: none;
+            }
+            
+            .sides {
+                position: fixed;
+                right: 0;
+            }
+            
+            .brand-asan-home {
+                width: 100%;
+                height: 60px;
+                background-color: var(--brand-color-blue);
+                vertical-align: center;
+                position: fixed;
+            }
+    
+            #sidemenu {
+                height: 100%;
+                width: 0;
+                overflow: hidden;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                right: 0;
+                background-color: var(--brand-color-gray);
+                overflow-x: hidden;
+                padding-top: 60px;
+                transition: 0.2s;
+            }
+    
+            #sidemenu a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #FFF;
+                display: block;
+                transition: 0.3s;
+            }
         </style>
     </th:block>
     <th:block layout:fragment="main">
-        <div id="map"></div>
-    <script>
-        const xy = [36.79, 127];
-        const nobrand = "Hello, world!";
-
-        const map = new L.map('map').setView(xy, 11);
-
-        var layer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a target="_blank" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        });
-
-        map.addLayer(layer);
-
-        var marker2 = L.marker([37.55504, 126.92064]);
-        marker2.on("click",function () {
-            alert(nobrand);
-        }).addTo(map);
-    </script>
-    <script>
-        function cmdr (station) {
-            axios.post("/api/j/"+station).then(r => {
-                for (let index = 0; index < 18; index++) {
-                    const dex = r.data[index];
-
-                    var iconT = L.icon({
-                        iconUrl: '/icons/droplet-half.png',
-                        shadowUrl: '/icons/droplet-fill.png',
-                        iconSize: [32, 32],
-                        shadowSize: [40, 40]
-                    });
-                    var checkpoint = L.marker([dex.lat, dex.lon], {icon: iconT}).addTo(map);
-                    checkpoint.on("click", function() {
-                        axios.post("/api/voir/"+dex.no).then(t => {
-                            map.flyTo([dex.lat, dex.lon], 16);
-                            this.bindPopup ("<h6>"+dex.resername+"저수지</h6>"+
-                                            "<b>금일정보</b> - "+datestring(t.data.tdate)+"<br>저수율 : "+t.data.trate+"%<br>저수지 수위 : "+t.data.twlevel+"<br>"+
-                                            "<br><b>전일정보</b> - "+datestring(t.data.ydate)+"<br>저수율 : "+t.data.yrate+"%<br>저수지 수위 : "+t.data.ywlevel)
-                            .openPopup();
-                        });
-                    });
-                }
+        <nav class="brand-asan-home">
+            <div id="sidemenu">
+                <button class="asan-btn-menu-x" onclick="NavSet('0', 'block')">&times;</button>
+                <a href="javascript:void(0)" onclick="selected('all')">전체</a>
+                <a href="javascript:void(0)" onclick="selected('음봉면')">음봉면</a>
+                <a href="javascript:void(0)" onclick="selected('인주면')">인주면</a>
+                <a href="javascript:void(0)" onclick="selected('염치읍')">염치면</a>
+                <a href="javascript:void(0)" onclick="selected('신창면')">신창면</a>
+                <a href="javascript:void(0)" onclick="selected('선장면')">선장면</a>
+            </div>
+        </nav>
+        <div class="sides">
+            <button class="asan-btn-menu" onclick="NavSet('250', 'none')">&#9776;</button>
+        </div>
+        <div id="mapping">
+            <div id="map"></div>
+        </div>
+        <script>
+            function NavSet(widthy, hd) {
+                document.querySelector("#sidemenu").style.width = widthy+"px";
+                document.querySelector("#mapping").style.right = widthy+"px";
+                document.querySelector(".asan-btn-menu").style.display = hd;
+            }
+        </script>
+        <script>
+            const xy = [36.79, 127];
+            const nobrand = "Hello, world!";
+    
+            const map = new L.map('map').setView(xy, 11);
+    
+            var layer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a target="_blank" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             });
-        }
-
-        function datestring(dates) {
-            const year = dates.substring(0,4);
-            const month = dates.substring(4,6);
-            const days = dates.substring(6,8);
-
-            return year+"."+month+"."+days;
-        }
-
-        cmdr("all");
-    </script>
+    
+            map.addLayer(layer);
+    
+            var marker2 = L.marker([37.55504, 126.92064]);
+            marker2.on("click",function () {
+                alert(nobrand);
+            }).addTo(map);
+        </script>
+        <script>
+            function selected(sta) {
+                $(".leaflet-marker-icon").remove();
+                $(".leaflet-popup").remove();
+                $(".leaflet-marker-shadow").remove();
+                cmdr(sta);
+            }
+    
+            function cmdr (station) {
+                axios.post("https://reservoir.tsukimorifriends.xyz/api/j/"+station).then(r => {
+                    console.log(station);
+                    console.log(r.data);
+    
+                    for (let index = 0; index < 18; index++) {
+    
+                        const dex = r.data[index];
+    
+                        var iconT = L.icon({
+                            iconUrl: '/icons/droplet-half.png',
+                            shadowUrl: '/icons/droplet-fill.png',
+                            iconSize: [32, 32],
+                            shadowSize: [40, 40]
+                        });
+                        
+                        var layerGroup = L.layerGroup().addTo(map);
+                        
+                        var checkpoint = L.marker([dex.lat, dex.lon], {icon: iconT});
+    
+                        checkpoint.addTo(map);
+                        
+                        checkpoint.on("click", function() {
+                            axios.post("https://reservoir.tsukimorifriends.xyz/api/voir/"+dex.no).then(t => {
+                                map.flyTo([dex.lat, dex.lon], 16);
+                                this.bindPopup ("<h6>"+dex.resername+"저수지</h6>"+
+                                                "<b>금일정보</b> - "+datestring(t.data.tdate)+"<br>저수율 : "+t.data.trate+"%<br>저수지 수위 : "+t.data.twlevel+"<br>"+
+                                                "<br><b>전일정보</b> - "+datestring(t.data.ydate)+"<br>저수율 : "+t.data.yrate+"%<br>저수지 수위 : "+t.data.ywlevel)
+                                .openPopup();
+                            });
+                        });
+                    }
+                });
+            }
+    
+            function datestring(dates) {
+                const year = dates.substring(0,4);
+                const month = dates.substring(4,6);
+                const days = dates.substring(6,8);
+    
+                return year+"."+month+"."+days;
+            }
+    
+            cmdr("all");
+        </script>
     </th:block>
 </html>
