@@ -100,6 +100,15 @@
 .sides {
     position: fixed;
     right: 0;
+    top: 0;
+}
+
+.lefty {
+    position: fixed;
+    left: 18px;
+    color: #FFF;
+    top: 18px;
+    font-weight: 00;
 }
 
 .brand-asan-home {
