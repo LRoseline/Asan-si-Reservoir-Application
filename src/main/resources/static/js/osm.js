@@ -4,7 +4,7 @@ const nobrand = "Hello, world!";
 const map = new L.map('map').setView(xy, 11);
 
 var layer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a target="_blank" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | &copy; <a target="_blank" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    attribution: '&copy; <a target="_blank" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Rawris API &copy; <a target="_blank" href="https://rawris.ekr.or.kr/">KRC.</a>'
 });
 
 map.addLayer(layer);
