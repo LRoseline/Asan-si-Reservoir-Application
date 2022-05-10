@@ -9,9 +9,29 @@
     </th:block>
     <th:block layout:fragment="main">
         <div id="map"></div>
+        <div class="credit">
+            <div class="credit-box">
+                <a class="close" href="javascript:void(0)" onclick="popupClose('.credit')">&times;</a>
+                <div class="credit-descript">
+                    <p>
+                        <b style="font-size: 18px;">OpenStreetMap</b><br>
+                        Data extracted from OpenStreetMap after September 2012 is licensed on terms of the Open Database License, "ODbL" 1.0, previously it was licensed CC-BY-SA 2.0.
+                    </p>
+                    <p>
+                        <b style="font-size: 18px;">한국농어촌공사_농촌용수 저수지 수위정보</b><br>
+                        COPYRIGHT(C) 2017 KRC.ALL RIGHT RESERVED.
+                    </p>
+                    <p>
+                        <b style="font-size: 18px;">Leaflet</b><br>
+                        BSD 2-Clause "Simplified" License<br>
+                        © 2010-2022 Vladimir Agafonkin. Maps © OpenStreetMap contributors.
+                    </p>
+                </div>
+            </div>
+        </div>
         <div id="sidemenu">
             <button class="asan-btn-menu-x" onclick="NavSet('0', 'block')">&times;</button>
-            <a id="sidemenu-lind" href="javascript:void(0)" onclick="spread('.Lulu')">지역선택</a>
+            <a id="sidemenu-lind" href="javascript:void(0)" onclick="spread('.Lulu')">지역선택 <span class="Lulu-static">&or;</span></a>
             <div class="Lulu">
                 <a class="sidemenu-location" href="javascript:void(0)" onclick="selected('all')">전체</a>
                 <a class="sidemenu-location" href="javascript:void(0)" onclick="selected('둔포면')">둔포면</a>
@@ -25,11 +45,12 @@
                 <a class="sidemenu-location" href="javascript:void(0)" onclick="selected('음봉면')">음봉면</a>
                 <a class="sidemenu-location" href="javascript:void(0)" onclick="selected('인주면')">인주면</a>
             </div>
+            <a id="sidemenu-lind" href="javascript:void(0)" onclick="popupFlow('.credit')">라이센스 정보</a>
         </div>
         <nav class="brand-asan-home">
             <div class="sides">
                 <span style="color:#fff;">Hello</span>
-                <button class="asan-btn-menu" onclick="NavSet('300', 'none')">&#9776;</button>
+                <button class="asan-btn-menu" onclick="NavSet('300', 'none')">&Colon;</button>
             </div>
         </nav>
         <script src="/js/osm.js"></script>

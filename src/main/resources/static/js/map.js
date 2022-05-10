@@ -1,3 +1,12 @@
+function popupFlow(target) {
+    document.querySelector(target).style.display = "block";
+    NavSet(0, "none")
+}
+
+function popupClose(target) {
+    document.querySelector(target).style.display = "none";
+}
+
 function NavSet(widthy, hd) {
     document.querySelector("#sidemenu").style.width = widthy+"px";
     document.querySelector("#mapping").style.marginRight = widthy+"px";
@@ -7,8 +16,10 @@ function NavSet(widthy, hd) {
 function spread(name) {
     var status = document.querySelector(name).style.display
     if (status != "block") {
+        document.querySelector(name+"-static").innerHTML = "&and;";
         document.querySelector(name).style.display = "block";
     } else {
+        document.querySelector(name+"-static").innerHTML = "&or;";
         document.querySelector(name).style.display = "none";
     }
 }
@@ -45,8 +56,8 @@ function cmdr (station) {
                 axios.post("/api/voir/"+dex.no).then(t => {
                     map.flyTo([dex.lat, dex.lon], 16);
                     this.bindPopup ("<h6>"+dex.resername+"저수지</h6>"+
-                                    "<b>금일정보</b> - "+datestring(t.data.tdate)+"<br>저수율 : "+t.data.trate+"%<br>저수지 수위 : "+t.data.twlevel+"<br>"+
-                                    "<br><b>전일정보</b> - "+datestring(t.data.ydate)+"<br>저수율 : "+t.data.yrate+"%<br>저수지 수위 : "+t.data.ywlevel)
+                                    "<b>전일정보</b> - "+datestring(t.data.ydate)+"<br>저수율 : "+t.data.yrate+"%<br>저수지 수위 : "+t.data.ywlevel+"<br>"+
+                                    "<br><b>금일정보</b> - "+datestring(t.data.tdate)+"<br>저수율 : "+t.data.trate+"%<br>저수지 수위 : "+t.data.twlevel)
                     .openPopup();
                 });
             });
