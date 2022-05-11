@@ -197,3 +197,31 @@
     font-weight: 800;
     transition: 0.3s;
 }
+
+.weather, .weather:visited, .weather:focus {
+    height: 60px;
+    background-color: #00000000;
+    border-color: #00000000;
+    color: #FFFFFF;
+    font-size: 24px;
+    transition: 0.2s;
+    outline-style: none;
+}
+
+.weather:hover {
+    height: 60px;
+    background-color: #FFF;
+    color: var(--brand-color-blue);
+    font-size: 24px;
+    outline-style: none;
+}
+
+.weather-side {
+    position: fixed;
+    background-color: #FFF;
+    width: 190px;
+    padding: 10px;
+    border-radius: 10px;
+    display: none;
+    font-size: 14px;
+}
