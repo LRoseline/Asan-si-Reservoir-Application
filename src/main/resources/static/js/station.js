@@ -28,8 +28,8 @@ function cmdr (station) {
 
                     map.flyTo([dex.lat, dex.lon], 16);
                     this.bindPopup ("<h6>"+dex.resername+"저수지</h6>"+
-                                    "<b>금일정보</b> - "+datestring(t.data.tdate)+"<br>저수율 : "+t.data.trate+"%<br>저수지 수위 : "+t.data.twlevel+"<br>"+
-                                    "<br><b>전일정보</b> - "+datestring(t.data.ydate)+"<br>저수율 : "+t.data.yrate+"%<br>저수지 수위 : "+t.data.ywlevel+"<br>"
+                                    "<b>전일정보</b> - "+datestring(t.data.ydate)+"<br>저수율 : "+t.data.yrate+"%<br>저수지 수위 : "+t.data.ywlevel+"<br>"+
+                                    "<b>금일정보</b> - "+datestring(t.data.tdate)+"<br>저수율 : "+t.data.trate+"%<br>저수지 수위 : "+t.data.twlevel
                     ).openPopup();
                 });
             });
