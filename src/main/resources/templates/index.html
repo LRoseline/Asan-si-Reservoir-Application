@@ -23,20 +23,24 @@
                     </p>
                     <p>
                         <b style="font-size: 18px;">Leaflet</b><br>
-                        © 2010-2022 Vladimir Agafonkin. Maps © OpenStreetMap contributors.
-                        BSD 2-Clause "Simplified" License<br>
+                        © 2010-2022 Vladimir Agafonkin. Maps © OpenStreetMap contributors.<br>
+                        BSD 2-Clause "Simplified" License
                     </p>
                     <p>
-                        Openweather
-                        © 2012 — 2022 OpenWeather ® All rights reserved
+                        <b style="font-size: 18px;">Openweathermap</b><br>
+                        © 2012 — 2022 OpenWeather ® All rights reserved<br>
                         Creative Commons Attribution-ShareAlike 4.0 International licence (CC BY-SA 4.0).
+                    </p>
+                    <p>
+                        <b style="font-size: 18px;">한국환경공단 에어코리아</b><br>
+                        Copyright @ 2018 한국환경공단. All rights reserved.
                     </p>
                 </div>
             </div>
         </div>
         <div id="sidemenu">
             <button class="asan-btn-menu-x" onclick="NavSet('0', 'block')">&times;</button>
-            <a id="sidemenu-lind" href="javascript:void(0)" onclick="spread('.Lulu')">지역선택 <span class="Lulu-static">&or;</span></a>
+            <a id="sidemenu-lind" href="javascript:void(0)" onclick="spread('.Lulu')">지역선택 <span class="Lulu-static"><i style="font-size: 16px;" class="bi bi-caret-down-fill"></i></span></a>
             <div class="Lulu">
                 <a class="sidemenu-location" href="javascript:void(0)" onclick="selected('all')">전체</a>
                 <a class="sidemenu-location" href="javascript:void(0)" onclick="selected('둔포면')">둔포면</a>
@@ -53,12 +57,19 @@
             <a id="sidemenu-lind" href="javascript:void(0)" onclick="popupFlow('.credit')">라이센스 정보</a>
         </div>
         <nav class="brand-asan-home">
-            <span class="lefty">아산시 저수지 및 날씨조회</span>
+            <span class="lefty">아산시 저수지/날씨</span>
             <div class="sides">
+                <button class="weather" onclick="spread('.weather-side')">
+                    <i class="bi bi-moon"></i>| 23℃ <span class="weather-side-static"><i class="bi bi-caret-down-fill" style="font-size: 16px;"></i></span>
+                </button>
                 <button class="asan-btn-menu" onclick="NavSet('300', 'none')">&Colon;</button>
+                <div class="weather-side">
+                    Hello, earthpokes!
+                </div>
             </div>
         </nav>
-        <script src="/js/osm.js"></script>
-        <script src="/js/map.js"></script>
+        <script src="/js/system.js"></script>
+        <script src="/js/loadmap.js"></script>
+        <script src="/js/station.js"></script>
     </th:block>
 </html>

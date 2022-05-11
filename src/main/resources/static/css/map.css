@@ -36,6 +36,28 @@
     border-radius: 20px;
 }
 
+.credit-box {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 20px;
+}
+
+@media (max-height: 830px) {
+    .credit-box {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        border-radius: 20px;
+        overflow: auto;
+        height: 90%;
+    }
+}
+
 .credit-descript {
     margin-top: 40px;
 }
