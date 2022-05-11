@@ -85,6 +85,11 @@ public class RestCon {
         return vo;
     }
 
+    @PostMapping("/vw/{location}")
+    public WeatherVO WeatherJ(@PathVariable("location") String location) {
+        return w.WeatherX(location);
+    }
+
     @PostMapping("/voir/{no}")
     public VoirAPI VoirAPI(@PathVariable("no") int no) throws Exception {
         VoirAPI api = new VoirAPI();
@@ -131,6 +136,8 @@ public class RestCon {
                 element.getElementsByTagName("rate"),
                 element.getElementsByTagName("water_level")
             };
+
+            api.setJurisdiction(vo.getJurisdiction());
 
             api.setTdate(voir[1].item(0).getFirstChild().getNodeValue());
             api.setTrate(voir[2].item(0).getFirstChild().getNodeValue());

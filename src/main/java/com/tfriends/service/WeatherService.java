@@ -19,6 +19,10 @@ public class WeatherService {
         return m.allweather(no);
     }
 
+    public WeatherVO WeatherX(String location) {
+        return m.voirweather(location);
+    }
+
     public List<LocationVO> LoadDomins() {
         return m.dominions();
     }

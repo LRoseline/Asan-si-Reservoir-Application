@@ -12,5 +12,7 @@ import org.apache.ibatis.annotations.Param;
 public interface WeatherMapper {
     public WeatherVO allweather(@Param("no")int no);
 
+    public WeatherVO voirweather(@Param("location")String location);
+
     public List<LocationVO> dominions();
 }
