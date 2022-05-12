@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import com.tfriends.domain.VoirAPI;
+import com.tfriends.domain.VoirDaily;
 import com.tfriends.domain.Voirs;
 import com.tfriends.domain.WeatherVO;
 import com.tfriends.service.VoirService;
@@ -102,7 +104,7 @@ public class RestCon {
 		String [] datesdf = {sdf.format(dates[0].getTime()), sdf.format(dates[1].getTime())};
 
 		String xml;
-		String URLComp = "http://apis.data.go.kr/B552149/reserviorWaterLevel/reservoirlevel/?serviceKey="+this.Tricker(3)+"&pageNo=1&numOfRows=10&fac_code="+vo.getCode()+"&date_s="+datesdf[0]+"&date_e="+datesdf[1];
+		String URLComp = "https://apis.data.go.kr/B552149/reserviorWaterLevel/reservoirlevel/?serviceKey="+this.Tricker(3)+"&pageNo=1&numOfRows=10&fac_code="+vo.getCode()+"&date_s="+datesdf[0]+"&date_e="+datesdf[1];
 
         URL url = new URL(URLComp);
         HttpURLConnection http = (HttpURLConnection)url.openConnection();
@@ -139,20 +141,19 @@ public class RestCon {
 
             api.setJurisdiction(vo.getJurisdiction());
 
-            api.setTdate(voir[1].item(0).getFirstChild().getNodeValue());
-            api.setTrate(voir[2].item(0).getFirstChild().getNodeValue());
-            api.setTwlevel(voir[3].item(0).getFirstChild().getNodeValue());
+            VoirDaily days = new VoirDaily();
 
-            try {
-                api.setYdate(voir[1].item(1).getFirstChild().getNodeValue());
-                api.setYrate(voir[2].item(1).getFirstChild().getNodeValue());
-                api.setYwlevel(voir[3].item(1).getFirstChild().getNodeValue());
-            } catch (Exception e) {
-                api.setYdate(voir[1].item(0).getFirstChild().getNodeValue());
-                api.setYrate(voir[2].item(0).getFirstChild().getNodeValue());
-                api.setYwlevel(voir[3].item(0).getFirstChild().getNodeValue());
+            List<VoirDaily> appmedia = new ArrayList<VoirDaily>();
+            for (int i = 0; i < 8; i++) {
+                days.setDate(voir[1].item(i).getFirstChild().getNodeValue());
+                days.setRate(voir[2].item(i).getFirstChild().getNodeValue());
+                days.setWlevel(voir[3].item(i).getFirstChild().getNodeValue());
+                appmedia.add(i, days);
             }
+            api.setDaily(appmedia);
         }
+        System.out.println(api);
+
         return api;
     }
 }
