@@ -25,16 +25,88 @@ function cmdr (station) {
             checkpoint.on("click", function() {
                 axios.post("/api/voir/"+dex.no).then(t => {
                     Weather(dex.jurisdiction);
+                    setTimeout(() => {
+                        chartWater(t.data);
+                    }, 1000);
 
                     map.flyTo([dex.lat, dex.lon], 16);
                     this.bindPopup ("<h6>"+dex.resername+"저수지</h6>"+
-                                    "<b>금일정보</b> - "+datestring(t.data.tdate)+"<br>저수율 : "+t.data.trate+"%<br>저수지 수위 : "+t.data.twlevel+"<br><br>"+
-                                    "<b>전일정보</b> - "+datestring(t.data.ydate)+"<br>저수율 : "+t.data.yrate+"%<br>저수지 수위 : "+t.data.ywlevel
-                    ).openPopup();
+                                    "<b>전일정보</b> - "+datestring(t.data.daily[6].date)+"<br>저수율 : "+t.data.daily[6].rate+"%<br>저수지 수위 : "+t.data.daily[6].wlevel+"<br>"+
+                                    "<br><b>금일정보</b> - "+datestring(t.data.daily[7].date)+"<br>저수율 : "+t.data.daily[7].rate+"%<br>저수지 수위 : "+t.data.daily[7].wlevel+"<br>"+
+                                    '<canvas id="waterchat">Chat Loading...</canvas>'
+                    , {
+                        maxWidth: 400
+                    }).openPopup();
                 });
             });
         }
     });
+}
+
+function chartWater(dat) {
+    const weatherchat = {
+        labels: [
+            daystring(dat.daily[0].date),
+            daystring(dat.daily[1].date),
+            daystring(dat.daily[2].date),
+            daystring(dat.daily[3].date),
+            daystring(dat.daily[4].date),
+            daystring(dat.daily[5].date),
+            daystring(dat.daily[6].date),
+            daystring(dat.daily[7].date)
+        ],
+        datasets: [
+                    {
+                        label: "저수지 수위",
+                        data: [
+                            dat.daily[0].wlevel,
+                            dat.daily[1].wlevel,
+                            dat.daily[2].wlevel,
+                            dat.daily[3].wlevel,
+                            dat.daily[4].wlevel,
+                            dat.daily[5].wlevel,
+                            dat.daily[6].wlevel,
+                            dat.daily[7].wlevel
+                        ],
+                        borderColor: "#ff7800",
+                        backgroundColor: "#ff7800",
+                    },
+                    {
+                        label: "저수율",
+                        data: [
+                            dat.daily[0].rate,
+                            dat.daily[1].rate,
+                            dat.daily[2].rate,
+                            dat.daily[3].rate,
+                            dat.daily[4].rate,
+                            dat.daily[5].rate,
+                            dat.daily[6].rate,
+                            dat.daily[7].rate
+                        ],
+                        borderColor: "#0d6826",
+                        backgroundColor: "#0d6826",
+                    }
+                ]};
+
+    const chart = new Chart(document.querySelector("#waterchat"), {
+        type: 'line',
+        data: weatherchat,
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            }
+        }
+    });
+}
+
+function daystring(dates) {
+    const days = dates.substring(6,8);
+
+    return days+"알";
 }
 
 function datestring(dates) {
