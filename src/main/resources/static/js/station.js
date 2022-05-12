@@ -29,7 +29,7 @@ function cmdr (station) {
                         chartWater(t.data);
                     }, 1000);
 
-                    map.flyTo([dex.lat, dex.lon], 16);
+                    map.flyTo([dex.lat+0.002, dex.lon], 16);
                     this.bindPopup ("<h6>"+dex.resername+"저수지</h6>"+
                                     "<b>전일정보</b> - "+datestring(t.data.daily[6].date)+"<br>저수율 : "+t.data.daily[6].rate+"%<br>저수지 수위 : "+t.data.daily[6].wlevel+"<br>"+
                                     "<br><b>금일정보</b> - "+datestring(t.data.daily[7].date)+"<br>저수율 : "+t.data.daily[7].rate+"%<br>저수지 수위 : "+t.data.daily[7].wlevel+"<br>"+
@@ -88,7 +88,7 @@ function chartWater(dat) {
                     }
                 ]};
 
-    const chart = new Chart(document.querySelector("#waterchat"), {
+    this.chart = new Chart(document.querySelector("#waterchat"), {
         type: 'line',
         data: weatherchat,
         options: {
@@ -106,7 +106,7 @@ function chartWater(dat) {
 function daystring(dates) {
     const days = dates.substring(6,8);
 
-    return days+"알";
+    return days+"일";
 }
 
 function datestring(dates) {
