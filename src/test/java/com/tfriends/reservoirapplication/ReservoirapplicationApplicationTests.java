@@ -127,15 +127,15 @@ class ReservoirapplicationApplicationTests {
         Voirs vo = v.VoirClick(1);
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMdd");
 		Calendar [] dates = {Calendar.getInstance(), Calendar.getInstance()};
-		dates[0].add(Calendar.DATE, -1);
+		dates[0].add(Calendar.DATE, -7);
 
 		String [] datesdf = {sdf.format(dates[0].getTime()), sdf.format(dates[1].getTime())};
 
 		String xml;
-		String URLComp = "https://apis.data.go.kr/B552149/reserviorWaterLevel/reservoirlevel/?serviceKey="+this.Tricker(3)+"&pageNo=1&numOfRows=10&fac_code="+vo.getCode()+"&date_s="+datesdf[0]+"&date_e="+datesdf[1];
+		String URLComp = "http://apis.data.go.kr/B552149/reserviorWaterLevel/reservoirlevel/?serviceKey="+this.Tricker(3)+"&pageNo=1&numOfRows=10&fac_code="+vo.getCode()+"&date_s="+datesdf[0]+"&date_e="+datesdf[1];
 
         URL url = new URL(URLComp);
-        HttpsURLConnection http = (HttpsURLConnection)url.openConnection();
+        HttpURLConnection http = (HttpURLConnection)url.openConnection();
 //        http.setConnectTimeout(10000);
         http.setUseCaches(false);
 
