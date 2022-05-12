@@ -94,9 +94,9 @@ public class RestCon {
 
     @PostMapping("/voir/{no}")
     public VoirAPI VoirAPI(@PathVariable("no") int no) throws Exception {
-        VoirAPI api = new VoirAPI();
+		VoirAPI api = new VoirAPI();
 
-        Voirs vo = v.VoirClick(no);
+        Voirs vo = v.VoirClick(1);
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMdd");
 		Calendar [] dates = {Calendar.getInstance(), Calendar.getInstance()};
 		dates[0].add(Calendar.DATE, -7);
@@ -104,7 +104,7 @@ public class RestCon {
 		String [] datesdf = {sdf.format(dates[0].getTime()), sdf.format(dates[1].getTime())};
 
 		String xml;
-		String URLComp = "https://apis.data.go.kr/B552149/reserviorWaterLevel/reservoirlevel/?serviceKey="+this.Tricker(3)+"&pageNo=1&numOfRows=10&fac_code="+vo.getCode()+"&date_s="+datesdf[0]+"&date_e="+datesdf[1];
+		String URLComp = "http://apis.data.go.kr/B552149/reserviorWaterLevel/reservoirlevel/?serviceKey="+this.Tricker(3)+"&pageNo=1&numOfRows=10&fac_code="+vo.getCode()+"&date_s="+datesdf[0]+"&date_e="+datesdf[1];
 
         URL url = new URL(URLComp);
         HttpURLConnection http = (HttpURLConnection)url.openConnection();
@@ -152,8 +152,6 @@ public class RestCon {
             }
             api.setDaily(appmedia);
         }
-        System.out.println(api);
-
         return api;
     }
 }
