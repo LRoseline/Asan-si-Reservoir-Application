@@ -168,16 +168,15 @@ class ReservoirapplicationApplicationTests {
 
             api.setJurisdiction(vo.getJurisdiction());
 
-            VoirDaily days = new VoirDaily();
-
             List<VoirDaily> appmedia = new ArrayList<VoirDaily>();
             for (int i = 0; i < 8; i++) {
+                VoirDaily days = new VoirDaily();
                 days.setDate(voir[1].item(i).getFirstChild().getNodeValue());
                 days.setRate(voir[2].item(i).getFirstChild().getNodeValue());
                 days.setWlevel(voir[3].item(i).getFirstChild().getNodeValue());
                 appmedia.add(i, days);
+                api.setDaily(appmedia);
             }
-            api.setDaily(appmedia);
         }
         System.out.println(api);
 	}
