@@ -155,7 +155,7 @@ public class RestCon {
         return api;
     }
 
-    @PostMapping("/voirget/{no}")
+    @GetMapping("/voirget/{no}")
     public VoirAPI VoirAPIGet(@PathVariable("no") int no) throws Exception {
 		VoirAPI api = new VoirAPI();
 
