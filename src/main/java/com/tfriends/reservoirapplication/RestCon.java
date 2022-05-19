@@ -96,7 +96,7 @@ public class RestCon {
     public VoirAPI VoirAPI(@PathVariable("no") int no) throws Exception {
 		VoirAPI api = new VoirAPI();
 
-        Voirs vo = v.VoirClick(1);
+        Voirs vo = v.VoirClick(no);
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMdd");
 		Calendar [] dates = {Calendar.getInstance(), Calendar.getInstance()};
 		dates[0].add(Calendar.DATE, -7);
