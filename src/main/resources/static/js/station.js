@@ -138,28 +138,28 @@ function WeatherReturn (icon) {
     if (icon == "01n") {
         return '<i class="bi bi-moon"></i>';
     }
-    if (icon == "02d" && icon == "04d") {
+    if (icon == "02d" || icon == "04d") {
         return '<i class="bi bi-cloud-sun"></i>';
     }
-    if (icon == "02n" && icon == "04n") {
+    if (icon == "02n" || icon == "04n") {
         return '<i class="bi bi-cloud-moon"></i>';
     }
-    if (icon == "03d" && icon == "03n") {
+    if (icon == "03d" || icon == "03n") {
         return '<i class="bi bi-cloud"></i>';
     }
-    if (icon == "09d" && icon == "09n") {
+    if (icon == "09d" || icon == "09n") {
         return '<i class="bi bi-cloud-rain-heavy"></i>';
     }
-    if (icon == "10d" && icon == "10n") {
+    if (icon == "10d" || icon == "10n") {
         return '<i class="bi bi-cloud-rain"></i>';
     }
-    if (icon == "11d" && icon == "11n") {
+    if (icon == "11d" || icon == "11n") {
         return '<i class="bi bi-cloud-lightning-rain"></i>';
     }
-    if (icon == "13d" && icon == "13n") {
+    if (icon == "13d" || icon == "13n") {
         return '<i class="bi bi-snow3"></i>';
     }
-    if (icon == "50d" && icon == "50n") {
+    if (icon == "50d" || icon == "50n") {
         return '<i class="bi bi-cloud-fog"></i>';
     }
 }
