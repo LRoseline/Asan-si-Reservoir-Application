@@ -6,6 +6,8 @@ import lombok.Data;
 
 @Data
 public class VoirAPI {
+    private String reservoirname;
+    
     private String jurisdiction;
 
     // 홍수위

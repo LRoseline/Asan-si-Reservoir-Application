@@ -203,6 +203,7 @@ public class RestCon {
             };
 
             api.setJurisdiction(vo.getJurisdiction());
+            api.setReservoirname(vo.getResername());
 
             List<VoirDaily> appmedia = new ArrayList<VoirDaily>();
             for (int i = 0; i < 8; i++) {
