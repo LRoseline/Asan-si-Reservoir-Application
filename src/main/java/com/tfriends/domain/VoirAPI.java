@@ -2,13 +2,22 @@ package com.tfriends.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
 public class VoirAPI {
-    private String reservoirname;
-    
+    public int no;
+    public String resername;
     private String jurisdiction;
+
+    @JsonIgnore
+    private Long code;
+
+    private double lat;
+    
+    private double lon;
 
     // 홍수위
     private String flood;

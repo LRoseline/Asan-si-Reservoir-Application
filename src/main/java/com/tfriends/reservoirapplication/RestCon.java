@@ -76,7 +76,7 @@ public class RestCon {
     }
     
     @GetMapping("/reservoir/{no}")
-    public Voirs VoirDetail(@PathVariable("no") int no) {
+    public VoirAPI VoirDetail(@PathVariable("no") int no) {
         return v.VoirClick(no);
     }
 
@@ -94,9 +94,7 @@ public class RestCon {
 
     @PostMapping("/voir/{no}")
     public VoirAPI VoirAPI(@PathVariable("no") int no) throws Exception {
-		VoirAPI api = new VoirAPI();
-
-        Voirs vo = v.VoirClick(no);
+        VoirAPI api = v.VoirClick(no);
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMdd");
 		Calendar [] dates = {Calendar.getInstance(), Calendar.getInstance()};
 		dates[0].add(Calendar.DATE, -7);
@@ -104,7 +102,7 @@ public class RestCon {
 		String [] datesdf = {sdf.format(dates[0].getTime()), sdf.format(dates[1].getTime())};
 
 		String xml;
-		String URLComp = "http://apis.data.go.kr/B552149/reserviorWaterLevel/reservoirlevel/?serviceKey="+this.Tricker(3)+"&pageNo=1&numOfRows=10&fac_code="+vo.getCode()+"&date_s="+datesdf[0]+"&date_e="+datesdf[1];
+		String URLComp = "http://apis.data.go.kr/B552149/reserviorWaterLevel/reservoirlevel/?serviceKey="+this.Tricker(3)+"&pageNo=1&numOfRows=10&fac_code="+api.getCode()+"&date_s="+datesdf[0]+"&date_e="+datesdf[1];
 
         URL url = new URL(URLComp);
         HttpURLConnection http = (HttpURLConnection)url.openConnection();
@@ -138,8 +136,6 @@ public class RestCon {
                 element.getElementsByTagName("rate"),
                 element.getElementsByTagName("water_level")
             };
-
-            api.setJurisdiction(vo.getJurisdiction());
 
             List<VoirDaily> appmedia = new ArrayList<VoirDaily>();
             for (int i = 0; i < 8; i++) {
@@ -157,9 +153,8 @@ public class RestCon {
 
     @GetMapping("/voirget/{no}")
     public VoirAPI VoirAPIGet(@PathVariable("no") int no) throws Exception {
-		VoirAPI api = new VoirAPI();
-
-        Voirs vo = v.VoirClick(no);
+        
+        VoirAPI vo = v.VoirClick(no);
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMdd");
 		Calendar [] dates = {Calendar.getInstance(), Calendar.getInstance()};
 		dates[0].add(Calendar.DATE, -7);
@@ -202,9 +197,6 @@ public class RestCon {
                 element.getElementsByTagName("water_level")
             };
 
-            api.setJurisdiction(vo.getJurisdiction());
-            api.setReservoirname(vo.getResername());
-
             List<VoirDaily> appmedia = new ArrayList<VoirDaily>();
             for (int i = 0; i < 8; i++) {
                 VoirDaily days = new VoirDaily();
@@ -213,9 +205,9 @@ public class RestCon {
                 days.setRate(voir[2].item(i).getFirstChild().getNodeValue());
                 days.setWlevel(voir[3].item(i).getFirstChild().getNodeValue());
                 appmedia.add(i, days);
-                api.setDaily(appmedia);
+                vo.setDaily(appmedia);
             }
         }
-        return api;
+        return vo;
     }
 }
