@@ -69,9 +69,7 @@ class ReservoirapplicationApplicationTests {
 
 	@Test
 	public void TestXMLReservoir () throws Exception {
-        VoirAPI api = new VoirAPI();
-
-        Voirs vo = v.VoirClick(1);
+        VoirAPI vo = v.VoirClick(1);
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMdd");
 		Calendar [] dates = {Calendar.getInstance(), Calendar.getInstance()};
 		dates[0].add(Calendar.DATE, -2);
@@ -116,14 +114,12 @@ class ReservoirapplicationApplicationTests {
 
 			System.out.println(voir[0]);
 		}
-        System.out.println(api);
+        System.out.println(vo);
 	}
 
 	@Test
 	public void Ashley() throws Exception {
-		VoirAPI api = new VoirAPI();
-
-        Voirs vo = v.VoirClick(1);
+        VoirAPI vo = v.VoirClick(1);
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMdd");
 		Calendar [] dates = {Calendar.getInstance(), Calendar.getInstance()};
 		dates[0].add(Calendar.DATE, -7);
@@ -166,18 +162,17 @@ class ReservoirapplicationApplicationTests {
                 element.getElementsByTagName("water_level")
             };
 
-            api.setJurisdiction(vo.getJurisdiction());
-
             List<VoirDaily> appmedia = new ArrayList<VoirDaily>();
             for (int i = 0; i < 8; i++) {
                 VoirDaily days = new VoirDaily();
+                
                 days.setDate(voir[1].item(i).getFirstChild().getNodeValue());
                 days.setRate(voir[2].item(i).getFirstChild().getNodeValue());
                 days.setWlevel(voir[3].item(i).getFirstChild().getNodeValue());
                 appmedia.add(i, days);
-                api.setDaily(appmedia);
+                vo.setDaily(appmedia);
             }
         }
-        System.out.println(api);
-	}
+        System.out.println(vo);
+    }
 }

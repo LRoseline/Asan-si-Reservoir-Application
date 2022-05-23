@@ -7,7 +7,7 @@
         SELECT * FROM reservoir
         <include refid="find"></include>
     </select>
-    <select id="vinfo" resultType="Voirs">
+    <select id="vinfo" resultType="VoirAPI">
         SELECT * FROM reservoir WHERE no = #{no}
     </select>
     <sql id="find">

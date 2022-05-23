@@ -2,6 +2,7 @@ package com.tfriends.service;
 
 import java.util.List;
 
+import com.tfriends.domain.VoirAPI;
 import com.tfriends.domain.Voirs;
 import com.tfriends.mapper.VoirMapper;
 
@@ -18,7 +19,7 @@ public class VoirService {
         return m.vlist(jurisdiction);
     }
 
-    public Voirs VoirClick (int no) {
+    public VoirAPI VoirClick (int no) {
         return m.vinfo(no);
     }
 }
