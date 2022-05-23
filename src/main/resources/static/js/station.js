@@ -31,8 +31,8 @@ function cmdr (station) {
 
                     map.flyTo([dex.lat+0.002, dex.lon], 16);
                     this.bindPopup ("<h6>"+dex.resername+"저수지</h6>"+
-                                    "<b>전일정보</b> - "+datestring(t.data.daily[6].date)+"<br>저수율 : "+t.data.daily[6].rate+"%<br>저수지 수위 : "+t.data.daily[6].wlevel+"EL.m<br>"+
-                                    "<br><b>금일정보</b> - "+datestring(t.data.daily[7].date)+"<br>저수율 : "+t.data.daily[7].rate+"%<br>저수지 수위 : "+t.data.daily[7].wlevel+"EL.m<br>"+
+                                    "<b>전일정보</b> - "+datestring(t.data.daily[6].date)+"<br>저수율 : "+t.data.daily[6].rate+" %<br>저수지 수위 : "+t.data.daily[6].wlevel+" EL.m<br>"+
+                                    "<br><b>금일정보</b> - "+datestring(t.data.daily[7].date)+"<br>저수율 : "+t.data.daily[7].rate+" %<br>저수지 수위 : "+t.data.daily[7].wlevel+" EL.m<br>"+
                                     '<canvas id="waterchat">Chat Loading...</canvas>'
                     , {
                         maxWidth: 400
