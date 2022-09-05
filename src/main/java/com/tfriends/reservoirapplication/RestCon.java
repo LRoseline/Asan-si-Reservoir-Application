@@ -2,8 +2,6 @@ package com.tfriends.reservoirapplication;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -20,6 +18,7 @@ import com.tfriends.domain.VoirAPI;
 import com.tfriends.domain.VoirDaily;
 import com.tfriends.domain.Voirs;
 import com.tfriends.domain.WeatherVO;
+import com.tfriends.service.SettingService;
 import com.tfriends.service.VoirService;
 import com.tfriends.service.WeatherService;
 
@@ -39,36 +38,14 @@ import org.w3c.dom.NodeList;
 @RequestMapping("/api")
 public class RestCon {
 
-    public String Tricker(int Input_the_line_number) throws Exception {
-        String s = "/home/emilia/keys.txt";
-        File f = new File(s);
-
-		FileReader reader = new FileReader(f);
-		BufferedReader br = new BufferedReader(reader);
-
-		String WYF = "/n";
-
-		String str="", l="";
-		
-		while((l=br.readLine())!=null) {
-			str += l+WYF;
-		}
-
-		br.close();
-		reader.close();
-
-		String[] array = str.trim().split(WYF);
-
-		String [] codesplit = array[Input_the_line_number].trim().split(" : ");
-
-		return codesplit[1];
-    }
-
     @Autowired
     private VoirService v;
 
     @Autowired
     private WeatherService w;
+
+    @Autowired
+    private SettingService setting;
     
     @GetMapping("/weather/{no}")
     public WeatherVO WeatherInfo(@PathVariable("no") int no) {
@@ -102,7 +79,7 @@ public class RestCon {
 		String [] datesdf = {sdf.format(dates[0].getTime()), sdf.format(dates[1].getTime())};
 
 		String xml;
-		String URLComp = "http://apis.data.go.kr/B552149/reserviorWaterLevel/reservoirlevel/?serviceKey="+this.Tricker(3)+"&pageNo=1&numOfRows=10&fac_code="+api.getCode()+"&date_s="+datesdf[0]+"&date_e="+datesdf[1];
+		String URLComp = "http://apis.data.go.kr/B552149/reserviorWaterLevel/reservoirlevel/?serviceKey="+setting.Tricker(3)+"&pageNo=1&numOfRows=10&fac_code="+api.getCode()+"&date_s="+datesdf[0]+"&date_e="+datesdf[1];
 
         URL url = new URL(URLComp);
         HttpURLConnection http = (HttpURLConnection)url.openConnection();
@@ -162,7 +139,7 @@ public class RestCon {
 		String [] datesdf = {sdf.format(dates[0].getTime()), sdf.format(dates[1].getTime())};
 
 		String xml;
-		String URLComp = "http://apis.data.go.kr/B552149/reserviorWaterLevel/reservoirlevel/?serviceKey="+this.Tricker(3)+"&pageNo=1&numOfRows=10&fac_code="+vo.getCode()+"&date_s="+datesdf[0]+"&date_e="+datesdf[1];
+		String URLComp = "http://apis.data.go.kr/B552149/reserviorWaterLevel/reservoirlevel/?serviceKey="+setting.Tricker(3)+"&pageNo=1&numOfRows=10&fac_code="+vo.getCode()+"&date_s="+datesdf[0]+"&date_e="+datesdf[1];
 
         URL url = new URL(URLComp);
         HttpURLConnection http = (HttpURLConnection)url.openConnection();
