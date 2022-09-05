@@ -98,6 +98,8 @@ public class RestCon {
         xml = sb.toString();
         br.close();
         http.disconnect();
+
+        System.out.println(URLComp);
         
         if (xml != null) {
 	        DocumentBuilderFactory factory = DocumentBuilderFactory
