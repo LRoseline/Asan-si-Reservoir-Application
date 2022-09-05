@@ -1,8 +1,8 @@
 package com.tfriends.service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+// import java.io.BufferedReader;
+// import java.io.File;
+// import java.io.FileReader;
 
 import com.tfriends.domain.SettingVO;
 import com.tfriends.mapper.SettingMapper;
@@ -38,27 +38,27 @@ public class SettingService {
         return path;
     }
 
-    public String Tricker(int Input_the_line_number) throws Exception {
-        File f = new File(this.OperationExecute());
+    // public String Tricker(int Input_the_line_number) throws Exception {
+    //     File f = new File(this.OperationExecute());
 
-		FileReader reader = new FileReader(f);
-		BufferedReader br = new BufferedReader(reader);
+	// 	FileReader reader = new FileReader(f);
+	// 	BufferedReader br = new BufferedReader(reader);
 
-		String WYF = "/n";
+	// 	String WYF = "/n";
 
-		String str="", l="";
+	// 	String str="", l="";
 		
-		while((l=br.readLine())!=null) {
-			str += l+WYF;
-		}
+	// 	while((l=br.readLine())!=null) {
+	// 		str += l+WYF;
+	// 	}
 
-		br.close();
-		reader.close();
+	// 	br.close();
+	// 	reader.close();
 
-		String[] array = str.trim().split(WYF);
+	// 	String[] array = str.trim().split(WYF);
 
-		String [] codesplit = array[Input_the_line_number].trim().split(" : ");
+	// 	String [] codesplit = array[Input_the_line_number].trim().split(" : ");
 
-		return codesplit[1];
-    }
+	// 	return codesplit[1];
+    // }
 }

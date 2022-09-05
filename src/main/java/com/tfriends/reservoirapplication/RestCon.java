@@ -79,7 +79,7 @@ public class RestCon {
 		String [] datesdf = {sdf.format(dates[0].getTime()), sdf.format(dates[1].getTime())};
 
 		String xml;
-		String URLComp = "http://apis.data.go.kr/B552149/reserviorWaterLevel/reservoirlevel/?serviceKey="+setting.Tricker(3)+"&pageNo=1&numOfRows=10&fac_code="+api.getCode()+"&date_s="+datesdf[0]+"&date_e="+datesdf[1];
+		String URLComp = "http://apis.data.go.kr/B552149/reserviorWaterLevel/reservoirlevel/?serviceKey="+setting.SettingLoad("datagokr")+"&pageNo=1&numOfRows=10&fac_code="+api.getCode()+"&date_s="+datesdf[0]+"&date_e="+datesdf[1];
 
         URL url = new URL(URLComp);
         HttpURLConnection http = (HttpURLConnection)url.openConnection();
@@ -139,7 +139,7 @@ public class RestCon {
 		String [] datesdf = {sdf.format(dates[0].getTime()), sdf.format(dates[1].getTime())};
 
 		String xml;
-		String URLComp = "http://apis.data.go.kr/B552149/reserviorWaterLevel/reservoirlevel/?serviceKey="+setting.Tricker(3)+"&pageNo=1&numOfRows=10&fac_code="+vo.getCode()+"&date_s="+datesdf[0]+"&date_e="+datesdf[1];
+		String URLComp = "http://apis.data.go.kr/B552149/reserviorWaterLevel/reservoirlevel/?serviceKey="+setting.SettingLoad("datagokr")+"&pageNo=1&numOfRows=10&fac_code="+vo.getCode()+"&date_s="+datesdf[0]+"&date_e="+datesdf[1];
 
         URL url = new URL(URLComp);
         HttpURLConnection http = (HttpURLConnection)url.openConnection();
