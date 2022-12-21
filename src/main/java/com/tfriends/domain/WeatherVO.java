@@ -24,6 +24,7 @@ public class WeatherVO extends DustStationVO{
 	private String weather0;
 	private Long temp0;
 	private Long humid0;
+	private double drop;
 	
 	private String weather1;
 	private Long temp1;
