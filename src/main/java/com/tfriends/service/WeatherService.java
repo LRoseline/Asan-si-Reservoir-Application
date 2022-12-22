@@ -1,5 +1,6 @@
 package com.tfriends.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.tfriends.domain.LocationVO;
@@ -16,7 +17,15 @@ public class WeatherService {
     private WeatherMapper m;
 
     public WeatherVO WeatherLoad(int no) {
-        return m.allweather(no);
+        WeatherVO vo =  m.allweather(no);
+
+		double [] arrdrop = {vo.getDrop1(),vo.getDrop2(),vo.getDrop3(),vo.getDrop4(),vo.getDrop5()};
+        
+        double max = Arrays.stream(arrdrop).max().getAsDouble();
+        int maxdrop = Double.valueOf(max).intValue();
+        vo.setMaxdrop(maxdrop);
+        
+		return vo;
     }
 
     public WeatherVO WeatherX(String location) {

@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString(includeFieldNames=true)
 public class WeatherVO extends DustStationVO{
 	@JsonIgnore
 	private int no;
@@ -25,6 +27,7 @@ public class WeatherVO extends DustStationVO{
 	private Long temp0;
 	private Long humid0;
 	private double drop;
+	private int maxdrop;
 	
 	private String weather1;
 	private double drop1;
