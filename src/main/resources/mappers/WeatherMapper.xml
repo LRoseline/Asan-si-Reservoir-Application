@@ -3,39 +3,31 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tfriends.mapper.WeatherMapper">
-    <select id="allweather" resultType="WeatherVO">
-        SELECT
-            a.`no`, a.`location`, a.`duststation`, a.`sunrise`, a.`sunset`, a.`drop`,
-            a.`weather0`, a.`temp0`, a.`humid0`,
-            a.`weather1`, a.`temp1`, a.`time1`, a.`drop1`,
-            a.`weather2`, a.`temp2`, a.`time2`, a.`drop2`,
-            a.`weather3`, a.`temp3`, a.`time3`, a.`drop3`,
-            a.`weather4`, a.`temp4`, a.`time4`, a.`drop4`,
-            a.`weather5`, a.`temp5`, a.`time5`, a.`drop5`,
-            b.`pm10v`, b.`pm10g`,
-            b.`pm25v`, b.`pm25g`
-        FROM dominications AS a
-        RIGHT JOIN dust_station AS b
-            on a.duststation = b.name
-        WHERE a.no = #{no}
-    </select>
     <select id="dominions" resultType="LocationVO">
         SELECT * FROM dominications
     </select>
     <select id="voirweather" resultType="WeatherVO">
-        SELECT
-            a.`no`, a.`location`, a.`duststation`, a.`sunrise`, a.`sunset`, a.`drop`,
-            a.`weather0`, a.`temp0`, a.`humid0`,
-            a.`weather1`, a.`temp1`, a.`time1`, a.`drop1`,
-            a.`weather2`, a.`temp2`, a.`time2`, a.`drop2`,
-            a.`weather3`, a.`temp3`, a.`time3`, a.`drop3`,
-            a.`weather4`, a.`temp4`, a.`time4`, a.`drop4`,
-            a.`weather5`, a.`temp5`, a.`time5`, a.`drop5`,
-            b.`pm10v`, b.`pm10g`,
-            b.`pm25v`, b.`pm25g`
-        FROM dominications AS a
-        RIGHT JOIN dust_station AS b
-            on a.duststation = b.name
-        WHERE a.location = #{location}
+        <![CDATA[
+            SELECT
+                a.`no`, a.`location`, a.`duststation`, a.`sunrise`, a.`sunset`, a.`drop`,
+                a.`weather0`, a.`temp0`, a.`humid0`,
+                a.`weather1`, a.`temp1`, a.`time1`, a.`drop1`,
+                a.`weather2`, a.`temp2`, a.`time2`, a.`drop2`,
+                a.`weather3`, a.`temp3`, a.`time3`, a.`drop3`,
+                a.`weather4`, a.`temp4`, a.`time4`, a.`drop4`,
+                a.`weather5`, a.`temp5`, a.`time5`, a.`drop5`,
+                b.`pm10v`, b.`pm10g`,
+                b.`pm25v`, b.`pm25g`
+            FROM dominications AS a
+            RIGHT JOIN dust_station AS b
+                on a.duststation = b.name
+            WHERE
+        ]]>
+        <if test="type == 'location'">
+            a.location = #{location}
+        </if>
+        <if test="type == 'number'">
+            WHERE a.no = #{no}
+        </if>
     </select>
 </mapper>

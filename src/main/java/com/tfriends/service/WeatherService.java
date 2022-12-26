@@ -17,7 +17,7 @@ public class WeatherService {
     private WeatherMapper m;
 
     public WeatherVO WeatherLoad(int no) {
-        WeatherVO vo =  m.allweather(no);
+        WeatherVO vo =  m.voirweather("number","",no);
 
 		double [] arrdrop = {vo.getDrop1(),vo.getDrop2(),vo.getDrop3(),vo.getDrop4(),vo.getDrop5()};
         
@@ -28,8 +28,8 @@ public class WeatherService {
 		return vo;
     }
 
-    public WeatherVO WeatherX(String location) {
-        return m.voirweather(location);
+    public WeatherVO WeatherX(String type, String location, int no) {
+        return m.voirweather(type, location, no);
     }
 
     public List<LocationVO> LoadDomins() {
