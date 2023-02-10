@@ -1,13 +1,13 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.7'
+	id 'org.springframework.boot' version '2.7.8'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id 'war'
 }
 
 group = 'com.tfriends'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+version = 'WEBPage-MAIN'
+sourceCompatibility = '19'
 
 repositories {
 	maven {
@@ -35,4 +35,8 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+bootWar {
+   archiveFileName = "reservoir.war"
 }
