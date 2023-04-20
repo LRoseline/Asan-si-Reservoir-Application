@@ -22,4 +22,20 @@
             on a.duststation = b.name
         WHERE a.location = #{location}
     </select>
+    <select id="allweather" resultType="WeatherVO">
+        SELECT
+            a.no, a.location, a.duststation, a.sunrise, a.sunset,
+            a.weather0, a.temp0, a.humid0,
+            a.weather1, a.temp1, a.time1,
+            a.weather2, a.temp2, a.time2,
+            a.weather3, a.temp3, a.time3,
+            a.weather4, a.temp4, a.time4,
+            a.weather5, a.temp5, a.time5,
+            b.pm10v, b.pm10g,
+            b.pm25v, b.pm25g
+        FROM dominications AS a
+        RIGHT JOIN dust_station AS b
+            on a.duststation = b.name
+        WHERE a.no = #{no}
+    </select>
 </mapper>
