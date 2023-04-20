@@ -17,22 +17,19 @@ public class WeatherService {
     private WeatherMapper m;
 
     public WeatherVO WeatherLoad(int no) {
-        WeatherVO vo =  m.voirweather("number","",no);
-
-		double [] arrdrop = {vo.getDrop1(),vo.getDrop2(),vo.getDrop3(),vo.getDrop4(),vo.getDrop5()};
-        
+        WeatherVO vo = this.m.allweather(no);
+        double[] arrdrop = { vo.getDrop1(), vo.getDrop2(), vo.getDrop3(), vo.getDrop4(), vo.getDrop5() };
         double max = Arrays.stream(arrdrop).max().getAsDouble();
         int maxdrop = Double.valueOf(max).intValue();
         vo.setMaxdrop(maxdrop);
-        
-		return vo;
+        return vo;
     }
 
-    public WeatherVO WeatherX(String type, String location, int no) {
-        return m.voirweather(type, location, no);
+    public WeatherVO WeatherX(String location) {
+        return this.m.voirweather(location);
     }
 
     public List<LocationVO> LoadDomins() {
-        return m.dominions();
+        return this.m.dominions();
     }
 }

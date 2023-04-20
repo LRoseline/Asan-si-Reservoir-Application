@@ -8,13 +8,10 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString(includeFieldNames=true)
+@ToString
 public class WeatherVO extends DustStationVO{
 	@JsonIgnore
 	private int no;
-
-	@JsonIgnore
-	private String type;
 
     private String location;
 
